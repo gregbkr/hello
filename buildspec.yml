@@ -4,7 +4,7 @@ env:
   variables:
     AWS_ACCOUNT_ID: 282835178041 
     IMAGE_REPO_NAME: hello
-    IMAGE_TAG: master
+    IMAGE_TAG: $CODEBUILD_SOURCE_VERSION
 
 phases: 
   install: 
