@@ -4,7 +4,6 @@ env:
   variables:
     AWS_ACCOUNT_ID: 282835178041 
     IMAGE_REPO_NAME: hello
-    IMAGE_TAG: $ENV
 
 phases: 
   install: 
@@ -13,7 +12,6 @@ phases:
   pre_build: 
     commands: 
       - env
-      - echo $ENV
       - echo $IMAGE_TAG
       - echo Logging in to Amazon ECR... 
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
