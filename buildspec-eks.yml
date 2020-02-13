@@ -16,7 +16,7 @@ phases:
       - echo Logging in to Amazon ECR... 
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
       - aws eks --region eu-west-3 update-kubeconfig --name hello
-      - kubectl version
+      - cat /root/.kube/config
       - kubectl get pod
       - echo toto
   build: 
