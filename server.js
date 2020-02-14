@@ -12,7 +12,7 @@ var hostname = os.hostname();
 // App
 const app = express();
 app.get('/', (req, res) => {
-  res.send(`Hello world *PROD* v3.1 from server: ${hostname}`);
+  res.send(`Hello world *PROD* v3.2 from server: ${hostname}`);
 });
 
 app.listen(PORT, HOST);
