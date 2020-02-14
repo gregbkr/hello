@@ -11,7 +11,12 @@ To use:
 - Curl localhost:8080
 
 Kubernetes:
-- Deploy: IMAGE=282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello IMAGE_TAG=prod kubectl apply -f hello.yml
+- Set env var:
+```
+export IMAGE=282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello
+export IMAGE_TAG=prod
+```
+- Deploy: `envsubst < hello.yml | kubectl apply -f -`
 - Test the app by curling the public DNS `EXTERNAL-IP` listed here: `kubectl get svc`
 - Curl: `curl acc43f4be4e5311eab2ed0e7ccd0f45b-1073317507.eu-west-3.elb.amazonaws.com:8080`
-- Delete deploy: `kubectl delete -f hello.yml`
+- Delete deploy: `envsubst < hello.yml | kubectl delete -f -`
