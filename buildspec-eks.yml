@@ -16,6 +16,7 @@ phases:
       - echo $IMAGE_TAG
       - echo Logging in to Amazon ECR... 
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
+      - kubectl version
       - echo Getting kubeconfig info to connect to Amazon EKS... 
       - aws eks --region eu-west-3 update-kubeconfig --name $EKS_CLUSTER
       - kubectl get svc
