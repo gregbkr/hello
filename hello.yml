@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: 282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello:prod
+        imagePullPolicy: Always
+        name: hello
+        ports:
+        - containerPort: 8080
+---     
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  selector:
+    app: hello
+  ports:
+    - port: 8080
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello
+spec:
+  rules:
+    - host: hello.satoshi.tech
+      http:
+        paths:
+          - backend:
+              serviceName: hello
+              servicePort: 8080
+            path: /
+
