@@ -4,6 +4,7 @@ env:
   variables:
     AWS_ACCOUNT_ID: 282835178041 
     IMAGE_REPO_NAME: hello
+    EKS_KUBECTL_ROLE_ARN: arn:aws:iam::282835178041:role/hello-build-role
 
 phases: 
   install: 
@@ -15,6 +16,13 @@ phases:
       - echo $IMAGE_TAG
       - echo Logging in to Amazon ECR... 
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
+      - cat $EKS_KUBECTL_ROLE_ARN
+      - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
+      - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
+      - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
+      - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
+      - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
+      - aws sts get-caller-identity
       - aws eks --region eu-west-3 update-kubeconfig --name hello
       - cat /root/.kube/config
       - kubectl config current-context
