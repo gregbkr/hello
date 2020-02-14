@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: hello-$IMAGE_TAG
   labels:
     app: hello
 spec:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: hello-$IMAGE_TAG
 spec:
   selector:
     app: hello
@@ -35,14 +35,14 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: hello
+  name: hello-$IMAGE_TAG
 spec:
   rules:
-    - host: hello.satoshi.tech
+    - host: hello-$IMAGE_TAG.satoshi.tech
       http:
         paths:
           - backend:
-              serviceName: hello
+              serviceName: hello-$IMAGE_TAG
               servicePort: 8080
             path: /
 

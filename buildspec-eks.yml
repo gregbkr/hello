@@ -39,7 +39,8 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - printf '[{"name":"hello","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
       - kubectl get pod
-      - kubectl apply -f hello.yml
+      - echo $IMAGE $IMGE_TAG
+      - envsubst < hello.yml | kubectl apply -f -
       - kubectl rollout restart deploy/hello
       - kubectl get all
 artifacts:
