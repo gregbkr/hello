@@ -17,8 +17,10 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
       - aws eks --region eu-west-3 update-kubeconfig --name hello
       - cat /root/.kube/config
+      - kubectl config current-context
+      - kubeclt config get-contexts
+      - kubectl run nginx --image nginx --restart=Never
       - kubectl get pod
-      - echo toto
   build: 
     commands: 
       - echo Build started on `date` 
