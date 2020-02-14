@@ -10,7 +10,8 @@ To use:
 - Run: `docker run --name hello -p 8080:8080 gregbkr/hello`
 - Curl localhost:8080
 
-Based on [project](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
-
-
-
+Kubernetes:
+- Deploy: IMAGE=282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello IMAGE_TAG=prod kubectl apply -f hello.yml
+- Test the app by curling the public DNS `EXTERNAL-IP` listed here: `kubectl get svc`
+- Curl: `curl acc43f4be4e5311eab2ed0e7ccd0f45b-1073317507.eu-west-3.elb.amazonaws.com:8080`
+- Delete deploy: `kubectl delete -f hello.yml`

@@ -15,7 +15,7 @@ spec:
         app: hello
     spec:
       containers:
-      - image: 282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello:prod
+      - image: $IMAGE:$IMAGE_TAG
         imagePullPolicy: Always
         name: hello
         ports:
