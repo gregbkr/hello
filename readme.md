@@ -11,12 +11,13 @@ To use:
 - Curl localhost:8080
 
 Kubernetes:
-- Set env var:
+- Simple hello: `kubectl apply -f hello.yml`
+- With template, set env var:
 ```
 export IMAGE=282835178041.dkr.ecr.eu-west-3.amazonaws.com/hello
-export IMAGE_TAG=prod
+export IMAGE_TAG=dev
 ```
-- Deploy: `envsubst < hello.yml | kubectl apply -f -`
+- Deploy: `envsubst < hello-template.yml | kubectl apply -f -`
 - Test the app by curling the public DNS `EXTERNAL-IP` listed here: `kubectl get svc`
 - Curl: `curl acc43f4be4e5311eab2ed0e7ccd0f45b-1073317507.eu-west-3.elb.amazonaws.com:8080`
-- Delete deploy: `envsubst < hello.yml | kubectl delete -f -`
+- Delete deploy: `envsubst < hello-template.yml | kubectl delete -f -`
