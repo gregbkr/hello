@@ -22,7 +22,7 @@ phases:
       - mv ./kubectl /usr/local/bin/kubectl
       - kubectl version --client
       - echo Getting kubeconfig info to connect to Amazon EKS... 
-      - aws eks --region $REGION update-kubeconfig --name $EKS_CLUSTER
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER
       - kubectl version
       - kubectl get svc
   build: 
