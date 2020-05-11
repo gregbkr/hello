@@ -4,7 +4,7 @@ env:
   variables:
     AWS_ACCOUNT_ID: 391378411314 
     IMAGE_REPO_NAME: hello-terra-bkr
-    EKS_CLUSTER: hello1
+    EKS_CLUSTER: hello-terra-bkr
 
 phases: 
   install: 
