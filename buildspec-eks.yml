@@ -5,6 +5,7 @@ env:
     AWS_ACCOUNT_ID: 391378411314 
     IMAGE_REPO_NAME: hello-terra-bkr
     EKS_CLUSTER: hello1
+    AWS_DEFAULT_REGION: eu-west-1
 
 phases: 
   install: 
